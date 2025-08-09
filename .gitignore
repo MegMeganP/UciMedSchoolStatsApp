@@ -361,3 +361,34 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# VS / .NET Framework MVC
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.log
+
+# NuGet
+packages/
+*.nupkg
+!packages/build/
+
+# Publish
+publish/
+
+# Sensitive configs (keep real ones out of git)
+Web.config
+App.config
+
+# Local DB/data (don’t publish developer data)
+App_Data/*.mdf
+App_Data/*.ldf
+App_Data/*.csv
+
+# IIS Express
+*.vspscc
+.vscode/
