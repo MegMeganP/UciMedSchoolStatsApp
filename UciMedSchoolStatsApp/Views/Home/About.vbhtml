@@ -24,12 +24,15 @@ End Code
 
         <h4 style="margin-top:16px;">Building the UCI Medical School Stats Application</h4>
         <ul>
-            <li>Created a new ASP.NET MVC app in Visual Studio 2019 (VB, .NET Framework 4.8).</li>
+            <li>Created a new ASP.NET MVC app in Visual Studio 2019 (VB, .NET Framework 4.8).  MVC VB Template is not supported in VS 2022.</li>
             <li>Added a service to download and read the AAMC file (CSV/XLSX) and import California rows.</li>
             <li>Modeled three tables with EF6: <em>CaMedSchool</em>, <em>Applications</em>, and <em>Matriculants</em>.</li>
             <li>Used EF6 Code-First Migrations to create/update a SQL Server database.</li>
+            <li>Added controllers for necessary crud operations.</li>
             <li>Built charts with Chart.js: counts and in-state vs out-of-state comparisons (stacked bars).</li>
             <li>Added click actions on % charts to show per-school pie charts.</li>
+            <li>Added Feature Request functionality with a <em>FeatureRequest</em> table in SQL database, model, controller, and views.</li>
+            <li>Updated the styling with CSS/Bootstrap to improve visual appeal.</li>
             <li>Deployed the application with Azure through Visual Studio.</li>
         </ul>
 
