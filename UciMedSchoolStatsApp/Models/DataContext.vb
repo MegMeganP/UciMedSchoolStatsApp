@@ -10,6 +10,7 @@ Public Class DataContext
     Public Property Schools As DbSet(Of CaMedSchool)
     Public Property Applications As DbSet(Of ApplicationStat)
     Public Property Matriculants As DbSet(Of MatriculantStat)
+    Public Property FeatureRequests As DbSet(Of FeatureRequest)
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
         MyBase.OnModelCreating(modelBuilder)
