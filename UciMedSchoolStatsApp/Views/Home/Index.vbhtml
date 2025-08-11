@@ -2,95 +2,210 @@
     ViewBag.Title = "Home"
 End Code
 
-<div class="container" style="max-width: 1080px;">
-    <!-- Hero -->
-    <div class="text-center" style="padding:32px 12px;">
-        <h1 class="display-4" style="margin-bottom:8px;">UCI Med School Stats</h1>
-        <p class="lead" style="margin:0;">
-            Explore California medical school applications &amp; matriculants, and manage feature ideas.
+<style>
+    :root{
+        --blue-border:#7FA4C4;
+        --blue-shadow:0 6px 18px rgba(127,164,196,.25);
+        --blue-accent:#4E79A7;
+        --blue-accent-hover:#3F658C;
+        --page-bg:#F6FAFF;
+        --text-muted:#6b7280;
+        --card-radius:14px;
+    }
+
+    /* Full-width page background (kills side white gutters) */
+    html, body { height:100%; }
+    body{
+        background: linear-gradient(180deg, var(--page-bg), #ffffff);
+        margin:0;
+    }
+
+    .page-wrap{
+        padding: 24px 12px 36px;
+    }
+
+    /* Header */
+    .page-title{
+        font-size: 3.5rem;            /* bigger title */
+        line-height: 1.15;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 10px;
+        color: #0f172a;
+        letter-spacing: .2px;
+        position: relative;
+    }
+    @@media (min-width: 992px){
+        .page-title{ font-size: 4rem; } /* even bigger on desktop */
+    }
+    .page-title::after{
+        content: "";
+        display: block;
+        width: 110px;
+        height: 5px;
+        background: var(--blue-accent);
+        margin: 14px auto 0;
+        border-radius: 3px;
+    }
+    .page-subtitle{
+        text-align: center;
+        font-size: 2rem;
+        color: var(--text-muted);
+        margin-bottom: 28px;
+    }
+
+    /* Equal height row */
+    .row-balanced{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    .col-half{
+        flex: 1 1 420px;
+        min-width: 320px;
+        display: flex;
+    }
+
+    /* Cards */
+    .card-ui{
+        border: 1px solid var(--blue-border);
+        border-radius: var(--card-radius);
+        box-shadow: var(--blue-shadow);
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden; /* keeps content clipped to rounded corners */
+    }
+    .card-img-wrap{
+        height: 200px;                 /* a touch taller for presence */
+        overflow: hidden;
+        border-bottom: 1px solid #e8eef6;
+        background: #f3f7fc;
+    }
+    .card-img-wrap img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        /* round top corners to match the card */
+        border-top-left-radius: var(--card-radius);
+        border-top-right-radius: var(--card-radius);
+    }
+    .card-body{
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    /* Buttons (uniform) */
+    .btn-main{
+        background: var(--blue-accent);
+        color: #fff;
+        border: none;
+        padding: .6rem 1.05rem;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background .2s ease, transform .05s ease;
+    }
+    .btn-main:hover{
+        background: var(--blue-accent-hover);
+        color: #fff;
+    }
+    .btn-main:active{ transform: translateY(1px); }
+    .btn-row{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: auto; /* pushes buttons to the bottom so both cards equalize */
+    }
+
+    /* Quick links (subtle list, no box) */
+    .quick-links{
+        text-align: center;
+        margin-top: 36px;
+    }
+    .quick-links ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: inline-flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .quick-links a{
+        text-decoration: none;
+        color: var(--blue-accent);
+        font-weight: 500;
+        padding-bottom: 2px;
+        border-bottom: 1px solid transparent;
+        transition: color .2s ease, border-color .2s ease;
+    }
+    .quick-links a:hover{
+        color: var(--blue-accent-hover);
+        border-bottom-color: var(--blue-border);
+    }
+</style>
+
+<div class="page-wrap">
+    <div class="container" style="max-width: 1080px;">
+
+        <!-- Title -->
+        <h1 class="page-title">UCI Medical School Statistics</h1>
+        <p class="page-subtitle">
+            Explore California medical school application data and manage feature requests in this interactive web app.
+            <br>
+            <small>*Note: This is a test app and not directly affiliated with UCI Medical School</small>
         </p>
-    </div>
 
-    <!-- Primary actions -->
-    <div class="row" style="gap:20px 0;">
-        <div class="col-md-6">
-            <div class="card" style="border:1px solid #e5e5e5; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
-                <div class="card-body" style="padding:18px 18px 8px;">
-                    <h3 style="margin:0 0 8px;">Charts &amp; Insights</h3>
-                    <p style="margin:0 0 12px;">
-                        Interactive charts for CA medical schools:
-                        <br />• Applicants by school (counts)
-                        <br />• Applications % In-State vs Out-of-State
-                        <br />• Matriculants by school (counts)
-                        <br />• Matriculants % In-State vs Out-of-State
-                    </p>
-                    <a class="btn btn-primary" href="@Url.Action("Index", "Charts")">Open Charts</a>
+        <!-- Primary actions -->
+        <div class="row-balanced">
+            <!-- Charts -->
+            <div class="col-half">
+                <div class="card-ui">
+                    <div class="card-img-wrap">
+                        <img src="~/Images/UciCharts.png" alt="Charts and Data Insights">
+                    </div>
+                    <div class="card-body">
+                        <h3>Charts &amp; Data Insights</h3>
+                        <p>
+                            Interactive charts for CA medical schools:
+                            <br>• Applicants by school (counts)
+                            <br>• Applications % In-State vs Out-of-State
+                            <br>• Matriculants by school (counts)
+                            <br>• Matriculants % In-State vs Out-of-State
+                            <br>• Applicant Matriculation Success Rates
+                        </p>
+                        <div class="btn-row">
+                            <a class="btn-main" href="@Url.Action("Index", "Charts")">Open Charts</a>
+                            <a class="btn-main" href="https://medschool.uci.edu/">Go To UCI</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Requests -->
+            <div class="col-half">
+                <div class="card-ui">
+                    <div class="card-img-wrap">
+                        <img src="~/Images/UciRequesting.png" alt="Feature Requests">
+                    </div>
+                    <div class="card-body">
+                        <h3>Feature Requests</h3>
+                        <p>
+                            Share site ideas, edit or delete requests, and mark items complete – submit and manage feature requests all in one place.
+                        </p>
+                        <div class="btn-row">
+                            <a class="btn-main" href="@Url.Action("Index", "FeatureRequests")">Request Feature</a>
+                            <a class="btn-main" href="@Url.Action("Index", "FeatureRequests")">Manage Requests</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card" style="border:1px solid #e5e5e5; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
-                <div class="card-body" style="padding:18px 18px 8px;">
-                    <h3 style="margin:0 0 8px;">Feature Requests</h3>
-                    <p style="margin:0 0 12px;">
-                        Log ideas, edit or delete requests, and mark items complete. Completed items are grayed out and move to the bottom.
-                    </p>
-                    <a class="btn btn-outline-primary" href="@Url.Action("Index", "FeatureRequests")">Manage Requests</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Data status (optional: shown only if provided) -->
-    <div class="row" style="margin-top:28px;">
-        <div class="col-md-12">
-            <div class="card" style="border:1px solid #e5e5e5; border-radius:12px;">
-                <div class="card-body" style="padding:16px 18px;">
-                    <h4 style="margin:0 0 8px;">Data Status</h4>
-
-                    @If ViewBag.LastImportAt IsNot Nothing Then
-                        @:<p style="margin:0 0 6px;">Last import: <strong>@(CDate(ViewBag.LastImportAt).ToLocalTime().ToString("yyyy-MM-dd HH:mm"))</strong></p>
-                    End If
-
-                    @If ViewBag.SourceFile IsNot Nothing Then
-                        @:<p style="margin:0;">Source file: <code>@ViewBag.SourceFile</code></p>
-                    End If
-
-                    @If ViewBag.SchoolCount IsNot Nothing OrElse ViewBag.AppCount IsNot Nothing OrElse ViewBag.MatCount IsNot Nothing Then
-                        @<text>
-                            <div class="row" style="margin-top:10px;">
-                                <div class="col-sm-4"><strong>Schools:</strong> @(If(ViewBag.SchoolCount, "-"))</div>
-                                <div class="col-sm-4"><strong>Applications rows:</strong> @(If(ViewBag.AppCount, "-"))</div>
-                                <div class="col-sm-4"><strong>Matriculants rows:</strong> @(If(ViewBag.MatCount, "-"))</div>
-                            </div>
-                        </text>
-                    End If
-
-                    @If ViewBag.LastImportAt Is Nothing AndAlso ViewBag.SourceFile Is Nothing AndAlso ViewBag.SchoolCount Is Nothing Then
-                        @:<p class="text-muted" style="margin:0;">No data status available yet. Import data, then return here to see a summary.</p>
-                    End If
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick links -->
-    <div class="row" style="margin-top:28px;">
-        <div class="col-md-12">
-            <div class="card" style="border:1px solid #e5e5e5; border-radius:12px;">
-                <div class="card-body" style="padding:16px 18px;">
-                    <h4 style="margin:0 0 8px;">Quick Links</h4>
-                    <ul style="margin:0; padding-left:18px;">
-                        <li><a href="@Url.Action("Index", "Charts")">Charts</a></li>
-                        <li><a href="@Url.Action("Index", "FeatureRequests")">Feature Requests</a></li>
-                        <li><a href="@Url.Action("About", "Home")">About</a></li>
-                        ' If you have an import endpoint, expose it here:
-                        '
-                        <li><a href="@Url.Action("Run", "Import")">Run Data Import</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>

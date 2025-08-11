@@ -31,7 +31,7 @@ End If
 
 <hr />
 
-<h3>Requests</h3>
+<h3>Request Management Table</h3>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -50,12 +50,12 @@ End If
                     <td>@r.Description</td>
                     <td>@r.RequesterName</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", New With {.id = r.Id}, New With {.class = "btn btn-sm btn-warning"})
+                        @Html.ActionLink("Edit", "Edit", New With {.id = r.Id}, New With {.class = "btn btn-sm btn btn-primary"})
                         @Using Html.BeginForm("Delete", "FeatureRequests", FormMethod.Post, New With {.style = "display:inline-block;margin-left:6px;"})
                             @Html.AntiForgeryToken()
                             @<text>
                                 <input type="hidden" name="id" value="@r.Id" />
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this request?');">
+                                <button type="submit" class="btn btn-sm btn btn-primary" onclick="return confirm('Delete this request?');">
                                     Delete
                                 </button>
                             </text>

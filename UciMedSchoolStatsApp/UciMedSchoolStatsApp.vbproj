@@ -241,7 +241,10 @@
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Images\MyCat.jpg" />
+    <Content Include="Images\UciCharts.png" />
     <Content Include="Images\UciLogo.png" />
+    <Content Include="Images\UciRequesting.png" />
+    <Content Include="Images\UciResponsiveMobile.png" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />

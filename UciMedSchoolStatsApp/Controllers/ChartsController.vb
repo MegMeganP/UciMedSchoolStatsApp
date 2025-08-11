@@ -70,4 +70,30 @@ Public Class ChartsController
         End Using
     End Function
 
+    ' Matriculation success rate = Matriculants / Applications (%)
+    Function MatriculationSuccess() As ActionResult
+        Using ctx As New DataContext()
+            ' Pull raw counts first (EF-friendly), then compute % in memory
+            Dim raw = (From s In ctx.Schools
+                       Join a In ctx.Applications On s.ID Equals a.SchoolID
+                       Join m In ctx.Matriculants On s.ID Equals m.SchoolID
+                       Order By s.Name
+                       Select New With {
+                       .School = s.Name,
+                       .Applications = a.NumberApplications,
+                       .Matriculants = m.NumberMatriculants
+                   }).ToList()
+
+            Dim result = raw.Select(Function(x) New With {
+            .School = x.School,
+            .AcceptancePct = If(x.Applications > 0, Math.Round((CDec(x.Matriculants) / CDec(x.Applications)) * 100D, 2), 0D),
+            .Applications = x.Applications,
+            .Matriculants = x.Matriculants
+        }).ToList()
+
+            Return Json(result, JsonRequestBehavior.AllowGet)
+        End Using
+    End Function
+
+
 End Class
